@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dummy-dashboard-apis
+  labels:
+    app: dummy-dashboard-apis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-dashboard-apis
+  template:
+    metadata:
+      labels:
+        app: dummy-dashboard-apis
+    spec:
+      containers:
+      - image: registry.gitlab.com/koushikraghu/python_api/sample_deployment:13
+        imagePullPolicy: Always
+        name: dummy-dashboard-apis
+        ports:
+        - containerPort: 4545
+          protocol: TCP
+        env:
+        - name: "MONGO_URI"
+          value: "mongodb://mongo:27017"
+        - name: "MONGO_DBNAME"
+          value: "AI_assets"
+        - name: "API_UNAME"
+          value:
+        - name: "API_PASS"
+          value:
+        - name: "API_JWT_SECRET"
+          value:
+      imagePullSecrets:
+       - name: gitlab-auth
+
