@@ -33,5 +33,5 @@ spec:
         - name: "API_JWT_SECRET"
           value:
       imagePullSecrets:
-       - name: gitlab-auth
+       - name: gitlab-external-auth
 
