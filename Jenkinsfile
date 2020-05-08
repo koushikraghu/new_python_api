@@ -1,11 +1,11 @@
-def label = "mypod-${UUID.randomUUID().toString()}"
-def serviceaccount = "my-new-jenkins"
+def label = "mypod-fortest"
+def serviceaccount = "helm-jenkins"
 podTemplate(label: label, serviceAccount: serviceaccount,
             containers: [containerTemplate(name: 'docker', image: 'docker:1.11', ttyEnabled: true, command: 'cat')],
             volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')])
 {
 node (label) {
-    def app
+	
     stage('docker') {
     container('docker') {
     docker.image('hello-world').run()
@@ -15,7 +15,7 @@ node (label) {
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
-        git url :'https://gitlab.com/koushikraghu/Python_APi.git', branch : 'master', credentialsId : 'gitlabauth'
+        git url :'https://github.com/koushikraghu/new_python_api.git', branch : 'master'
     }
 
     stage('Build image') {
@@ -27,9 +27,6 @@ node (label) {
     }
 
     stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
 		container('docker'){
 		    docker.withRegistry('https://registry.gitlab.com/koushikraghu/python_api', 'gitlabauth') {
 		    sh "docker push registry.gitlab.com/koushikraghu/python_api:${env.BUILD_NUMBER}"
