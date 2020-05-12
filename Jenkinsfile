@@ -22,7 +22,7 @@ node (label) {
 			scannerHome = tool 'SonarQubeScanner'
 	withSonarQubeEnv('SonarQube') {
 		println('Sonar Method enter');
-		sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=hello-world-python -Dsonar.projectName=hello-world-python -Dsonar.projectVersion=1.0 -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=. -Dsonar.language=py -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD"
+		sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=hello-world-python -Dsonar.projectName=hello-world-python -Dsonar.projectVersion=1.0 -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=. -Dsonar.language=py -Dsonar.scm.disabled = True -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD"
 		//sonar-scanner -Dsonar.projectKey=myproject -Dsonar.sources=src1
 
 		//def scannerHome = tool 'Sonarqube';
