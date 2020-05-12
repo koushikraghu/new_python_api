@@ -21,7 +21,7 @@ node (label) {
 		withCredentials([usernamePassword(credentialsId: 'SONAR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
 	withSonarQubeEnv('SonarQube') {
 	println('Sonar Method enter');
-		def scannerHome = tool 'Sonarqube Scanner 2.8';
+		def scannerHome = tool 'Sonarqube';
 		sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD";
 			println('Sonar Method exit');                        
 	}
