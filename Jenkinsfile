@@ -17,6 +17,16 @@ node (label) {
 
         git url :'https://github.com/koushikraghu/new_python_api.git', branch : 'master'
     }
+    stage('SonarQube Analysis') {
+		withCredentials([usernamePassword(credentialsId: 'SONAR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
+	withSonarQubeEnv('SonarQube') {
+	println('Sonar Method enter');
+		def scannerHome = tool 'Sonar Scanner';
+		sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD";
+			println('Sonar Method exit');                        
+	}
+     }				
+    } 
 
     stage('Build image') {
         container('docker'){
