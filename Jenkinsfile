@@ -19,12 +19,12 @@ node (label) {
     }
     stage('SonarQube Analysis') {
 		withCredentials([usernamePassword(credentialsId: 'SONAR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]){
-			scannerHome = tool 'SonarQubeScanner'
+			
 	withSonarQubeEnv('SonarQube') {
 		println('Sonar Method enter');
 		//sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=hello-world-python -Dsonar.projectName=hello-world-python -Dsonar.projectVersion=1.0 -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=. -Dsonar.language=py -Dsonar.scm.disabled=True -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD"
 		//sonar-scanner -Dsonar.projectKey=myproject -Dsonar.sources=src1
-
+		scannerHome = tool 'SonarQubeScanner'
 		//def scannerHome = tool 'Sonarqube';
 		sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD";
 			println('Sonar Method exit');                        
