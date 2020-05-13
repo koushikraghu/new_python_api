@@ -26,7 +26,7 @@ node (label) {
 		//sonar-scanner -Dsonar.projectKey=myproject -Dsonar.sources=src1
 		scannerHome = tool 'SonarQubeScanner'
 		//def scannerHome = tool 'Sonarqube';
-		sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD";
+		sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=$USERNAME -Dsonar.password=$PASSWORD -Dproject.settings=../setting/sonar-project.properties";
 			println('Sonar Method exit');                        
 	}
      }				
